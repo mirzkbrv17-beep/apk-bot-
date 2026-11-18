@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: ultimate-apk-platform
+    runtime: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: ADMIN_IDS
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ultimate-apk-db
+          property: connectionString
+      - key: BOT_USERNAME
+        sync: false
+      - key: MAX_FILE_SIZE_MB
+        value: "200"
+databases:
+  - name: ultimate-apk-db
+    plan: basic-256mb
